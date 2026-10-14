@@ -1,13 +1,41 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
-
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        //se le pide al usuario que digite el numero para basarse el arreglo
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("¿Cuantos elementos tiene el arreglo? ");
+       int numero = teclado.nextInt();
+       if(numero<=0) {
+           System.out.println("se necesita un numero natural para hallar la mediana del arreglo");
+           return;
+       }
+       //se leen los elementos del arreglo
+        double[]x=new double[numero];
+        for(int i=0;i<numero;i++) {
+            System.out.print("x["+i+"] = ");
+            x[i]=teclado.nextDouble();
+        }
+        reales(x);
+        teclado.close();
+    }
+    public static void reales(double[] x) {
+        int n=x.length;
+        //ordenar de menor a mayor
+        for (int i=0;i<n-1;i++) {
+            for (int j=0;j<n-1-i;j++) {
+                if(x[j]>x[j+1]) {
+                    double temp=x[j];
+                    x[j]=x[j+1];
+                    x[j+1]=temp;
+                }
+            }
+        }
+        //hallar la mediana
+        if(n%2==0) {
+            double mediana = (x[n/2-1]+x[n/2])/2;
+            System.out.println("la mediana del arreglo es: "+ mediana);
+        }else{
+            System.out.println("la mediana del arreglo es: "+ x[n/2]);
+        }
     }
 }
